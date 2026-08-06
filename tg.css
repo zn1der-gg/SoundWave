@@ -1,0 +1,233 @@
+/* === TELEGRAM MINI APP STYLES === */
+
+/* Override sidebar - hidden in Telegram */
+.tg-app .sidebar,
+.tg-app .mobile-menu-btn,
+.tg-app .mobile-overlay {
+  display: none !important;
+}
+
+/* Main area - full width, no sidebar */
+.tg-app .main {
+  margin-left: 0 !important;
+  width: 100% !important;
+  padding: 16px 16px 100px 16px !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 16px) !important;
+}
+
+/* Bottom tab navigation */
+.tg-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--sidebar-bg, #1a1a2e);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.tg-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  color: var(--text-secondary, #a0a0b8);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-family: inherit;
+  transition: color 0.2s;
+  min-width: 48px;
+  border-radius: 8px;
+}
+
+.tg-tab svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.tg-tab span {
+  line-height: 1;
+}
+
+.tg-tab.active {
+  color: var(--accent, #6c5ce7);
+}
+
+.tg-tab:active {
+  transform: scale(0.92);
+}
+
+/* Player bar spacing - above bottom tabs */
+.tg-mini-player {
+  bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Upload zone - compact for mobile */
+.tg-app .upload-zone {
+  padding: 24px 16px;
+}
+
+.tg-app .upload-title {
+  font-size: 14px;
+}
+
+.tg-app .upload-subtitle {
+  font-size: 12px;
+}
+
+/* Stats grid - 2x2 */
+.tg-app .stats-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+/* Track list - compact */
+.tg-app .track-list {
+  gap: 4px;
+}
+
+/* Page header - compact */
+.tg-app .page-header {
+  margin-bottom: 12px;
+}
+
+.tg-app .page-title {
+  font-size: 20px;
+}
+
+/* Search - full width */
+.tg-app .search-bar {
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 12px;
+}
+
+.tg-app .search-input-wrapper {
+  width: 100%;
+}
+
+/* Playlist grid - single column on mobile */
+.tg-app .playlist-grid {
+  grid-template-columns: 1fr;
+}
+
+/* Modals - adjust for Telegram */
+.tg-app .modal-overlay {
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+.tg-app .modal {
+  max-height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 40px);
+  overflow-y: auto;
+}
+
+/* Buttons - larger touch targets */
+.tg-app .btn {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.tg-app .btn-sm {
+  min-height: 36px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* Track items - larger touch targets */
+.tg-app .track-item {
+  padding: 10px 12px;
+  min-height: 52px;
+}
+
+.tg-app .track-actions .track-action-btn {
+  width: 36px;
+  height: 36px;
+}
+
+/* Player controls - bigger buttons for mobile */
+.tg-app .player-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.tg-app .play-btn-main {
+  width: 48px;
+  height: 48px;
+}
+
+/* Account page */
+.tg-app .account-stats-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+/* Telegram theme mapping */
+:root {
+  --tg-bg: #ffffff;
+  --tg-text: #000000;
+  --tg-hint: #999999;
+  --tg-link: #6c5ce7;
+  --tg-btn: #6c5ce7;
+  --tg-btn-text: #ffffff;
+  --tg-secondary-bg: #f0f0f0;
+  --tg-safe-area-top: 0px;
+  --tg-safe-area-bottom: 0px;
+}
+
+/* Dark theme (Telegram) */
+[data-theme="dark"] .tg-bottom-nav {
+  background: rgba(22, 22, 34, 0.95);
+}
+
+[data-theme="light"] .tg-bottom-nav {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Smooth transitions for theme changes */
+.tg-app * {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Hide filter buttons on very small screens */
+@media (max-width: 360px) {
+  .tg-app .filter-btn {
+    display: none;
+  }
+}
+
+/* Extra compact for very short screens */
+@media (max-height: 600px) {
+  .tg-app .upload-zone {
+    display: none;
+  }
+  .tg-app .stats-grid {
+    display: none;
+  }
+}
+
+/* Scrollbar styling */
+.tg-app ::-webkit-scrollbar {
+  width: 3px;
+}
+
+.tg-app ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tg-app ::-webkit-scrollbar-thumb {
+  background: rgba(108, 92, 231, 0.3);
+  border-radius: 3px;
+}
