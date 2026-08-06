@@ -8,6 +8,9 @@ let currentPlaylistId = null;
 let currentSort = 'title';
 let currentSortDir = 'asc';
 
+// Signal when app is fully ready (for Telegram init)
+window._appReady = new Promise(resolve => { window._appReadyResolve = resolve; });
+
 // === INIT ===
 document.addEventListener('DOMContentLoaded', async () => {
   // Init global DB first
@@ -35,6 +38,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Render everything
   renderAll();
+
+  // Signal app ready
+  if (window._appReadyResolve) window._appReadyResolve();
 
   // Init volume display
   const volFill = document.querySelector('.volume-fill');
@@ -161,6 +167,36 @@ function toggleTheme() {
 function updateThemeUI(theme) {
   const label = document.getElementById('theme-label');
   if (label) label.textContent = theme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+}
+
+// === ACCOUNT LINKING (PC ↔ Telegram) ===
+async function generateLinkCode() {
+  if (!currentUser) {
+    showToast('Сначала войдите в аккаунт', 'error');
+    return;
+  }
+  const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+  await window.musicDB.saveSetting('linkCode_' + code, {
+    userId: currentUser.id,
+    name: currentUser.name,
+    email: currentUser.email,
+    createdAt: Date.now()
+  });
+  const el = document.getElementById('pc-link-code');
+  const val = document.getElementById('pc-link-code-value');
+  if (el && val) {
+    val.textContent = code;
+    el.style.display = 'block';
+  }
+  showToast('Код: ' + code, 'success');
+}
+
+function copyLinkCode() {
+  const val = document.getElementById('pc-link-code-value');
+  if (val) {
+    navigator.clipboard.writeText(val.textContent);
+    showToast('Код скопирован!', 'success');
+  }
 }
 
 // === FILE HANDLING ===

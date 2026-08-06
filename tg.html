@@ -157,6 +157,20 @@
             </button>
           </div>
 
+          <!-- Account Linking -->
+          <div class="account-card" id="tg-link-section">
+            <h3 class="account-section-title">🔗 Привязка аккаунта</h3>
+            <p style="color:var(--text-secondary);font-size:13px;margin-bottom:12px;">
+              Войдите с ПК и Telegram одним аккаунтом
+            </p>
+            <button class="btn btn-primary btn-sm" onclick="showLinkAccountModal()" style="width:100%;justify-content:center;">
+              Ввести код с ПК
+            </button>
+            <div id="link-code-display" style="display:none;margin-top:12px;text-align:center;">
+              <div style="font-size:24px;font-weight:700;color:var(--accent);letter-spacing:4px;"></div>
+            </div>
+          </div>
+
           <!-- Profile Settings (logged in only) -->
           <div class="account-card" id="account-profile-card">
             <h3 class="account-section-title">Настройки профиля</h3>
@@ -302,6 +316,23 @@
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Создать</button>
       </form>
       <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:12px;" onclick="hidePlaylistModal()">Отмена</button>
+    </div>
+  </div>
+
+  <!-- Link Account Modal -->
+  <div class="modal-overlay" id="tg-link-modal">
+    <div class="modal">
+      <div class="modal-title">Привязать аккаунт с ПК</div>
+      <p style="color:var(--text-secondary);font-size:13px;text-align:center;margin-bottom:16px;">
+        Войдите на ПК → Аккаунт → Привязка → скопируйте код
+      </p>
+      <div class="form-group">
+        <label class="form-label">Код</label>
+        <input type="text" class="form-input" id="link-code-input" placeholder="XXXXXX"
+               style="text-align:center;font-size:24px;letter-spacing:8px;font-weight:700;" maxlength="6">
+      </div>
+      <button class="btn btn-primary" onclick="handleLinkCode()" style="width:100%;justify-content:center;">Привязать</button>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:12px;" onclick="hideLinkAccountModal()">Отмена</button>
     </div>
   </div>
 
